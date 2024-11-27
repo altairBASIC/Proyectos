@@ -1,0 +1,30 @@
+Análisis y Visualización de Redes Sociales: Construcción de un Grafo de Interacciones en Reddit Utilizando NetworkX y Aceleración con RAPIDS cuGraph de NVIDIA
+Este proyecto examina la estructura y las conexiones de la red social Reddit, específicamente el subreddit r/chile, mediante un análisis de redes sociales. Empezando por la recopilación de datos de conexiones entre usuarios, se crea una matriz de adyacencia que representa estas relaciones. Utilizando NetworkX y la aceleración con cuGraph, exploramos diversas propiedades estructurales del grafo, como el grado de los nodos, centralidad y otras metricas importantes. Este análisis se enfoca en acercar la comprensión de la dinámica de interacción en esta comunidad virtual y facilitar una visualización gráfica para una representación clara de la red.
+
+Introducción
+El análisis de redes sociales permite obtener una comprensión profunda sobre cómo interactúan los individuos dentro de una comunidad virtual. Reddit, como una de las plataformas sociales más populares, ofrece una vasta cantidad de datos para estudiar patrones de interacción entre usuarios y temas. Este proyecto se centra en la construcción de un grafo que represente estas interacciones en Reddit, enfocándose en un subreddit específico chileno r/Chile. El objetivo es que a partir de estos analisis visualizar mediante el uso de herramientas aceleradas como implementar un grafo con cantidades de datos masivos, para luego entender como estas se relacionan con las matrices de adyacencia con sus respectivas propiedades. Para este fin, se emplea la biblioteca NetworkX, ampliamente utilizada para el análisis de redes complejas, junto con cuGraph, una herramienta de la suite RAPIDS de NVIDIA que acelera el procesamiento gráfico mediante GPUs. El uso de cuGraph en conjunto con NetworkX permite mejorar el rendimiento en la construcción y manipulación del grafo, especialmente útil en datasets extensos. Este enfoque optimizado resulta crucial para el análisis en tiempo real y la visualización de grandes redes, proporcionando así una visión clara de las interacciones en Reddit.
+
+Procedimiento
+Recopilación de Datos:
+
+Utilizando la API de Reddit mediante la librería PRAW, se extraen datos relevantes de publicaciones y comentarios en el subreddit seleccionado (en este caso, r/Chile). Esta etapa incluye la recopilación de identificadores de publicaciones, nombres de autores, y conexiones a través de comentarios, lo cual permite crear un conjunto de datos detallado sobre las interacciones entre usuarios y temas en la comunidad. Debido a las restricciones inherentes al uso de entornos con recursos limitados, como GPUs o TPUs T4 en Google Colab, y considerando que el análisis se realiza con fines académicos, se ha ajustado la recopilación de datos para garantizar un enfoque práctico y manejable. Como resultado, la cantidad de nodos y aristas en la red puede fluctuar dependiendo de las características de la muestra seleccionada.
+
+Construcción del Grafo de Interacciones:
+
+Con NetworkX, se establece un grafo donde los nodos representan a los usuarios y temas, y las aristas representan las interacciones (como comentarios o respuestas) entre ellos. Este grafo inicial se construye de manera que se capturen las relaciones principales de interés, estableciendo una base para el análisis estructural posterior.
+
+Transformación y Optimización del Grafo con cuGraph:
+
+Se transfiere el grafo construido en NetworkX a cuGraph para aprovechar la aceleración de procesamiento en GPU. En esta etapa, se optimizan tareas intensivas de cómputo, como el cálculo de métricas de centralidad de intermediación (para identificar usuarios clave en la red) y la detección de comunidades (para ver grupos de interacción frecuentes o comunidades activas dentro de la red).
+
+Construcción de la Matriz de Adyacencia:
+
+Utilizando la estructura del grafo, se construye una matriz de adyacencia que representa las conexiones directas entre nodos. Esta matriz permite analizar la conectividad y estructura de la red en un formato matricial, facilitando cálculos adicionales y sirviendo como base para la visualización en forma de mapa de calor.
+
+Análisis de Propiedades de la Red:
+
+Con la matriz de adyacencia y el grafo optimizado en cuGraph, se calculan propiedades clave de la red. Estos análisis incluyen el grado de los nodos, la identificación de nodos centrales mediante métricas como la centralidad de grado, cercanía e intermediación, y la evaluación del PageRank para medir la influencia relativa de cada usuario en la red. Además, se aplica el algoritmo de Louvain para la detección de comunidades, proporcionando información sobre la agrupación y modularidad de la red. También se analizan las componentes conexas para identificar subconjuntos independientes de nodos, y se calcula la densidad de la red, permitiendo evaluar su nivel de interconectividad. Finalmente, se determinan los caminos mínimos entre nodos, lo que ayuda a entender la eficiencia en la transmisión de información dentro de la red.
+
+Visualización de la Red:
+
+Para una representación visual clara, se crea una visualización gráfica del grafo utilizando NetworkX, Pyvis y Plotly. Se emplean distintas herramientas de visualización para destacar las conexiones de alta interacción, y se genera un mapa de calor interactivo que muestra la matriz de adyacencia. Esto permite una comprensión visual de las interacciones y la estructura de la red.
